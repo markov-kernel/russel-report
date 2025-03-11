@@ -1,0 +1,226 @@
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$,$endif$,11pt]{article}
+
+% Use microtype for high-quality typography
+\usepackage{microtype}
+\usepackage{fontspec}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{csquotes}
+\usepackage{framed}
+\usepackage{tcolorbox}
+\usepackage{textcomp}
+\usepackage{unicode-math}
+\usepackage{pifont}
+
+% For European languages
+\usepackage{polyglossia}
+\setmainlanguage{dutch}
+\setotherlanguage{english}
+
+% Define colors
+\definecolor{darkblue}{RGB}{0, 51, 102}
+\definecolor{mediumblue}{RGB}{0, 102, 204}
+\definecolor{lightblue}{RGB}{235, 244, 250}
+\definecolor{lightgray}{RGB}{240, 240, 240}
+\definecolor{darkgray}{RGB}{80, 80, 80}
+\definecolor{linkcolor}{RGB}{0, 102, 204}
+
+% Set page geometry for technical proposals
+\geometry{
+  $if(margin_left)$left=$margin_left$,$else$left=2.5cm,$endif$
+  $if(margin_right)$right=$margin_right$,$else$right=2.5cm,$endif$
+  $if(margin_top)$top=$margin_top$,$else$top=3cm,$endif$
+  $if(margin_bottom)$bottom=$margin_bottom$,$else$bottom=3cm,$endif$
+}
+
+% Set up fonts - professional readable fonts for proposals
+$if(mainfont)$
+\setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+$else$
+\setmainfont{Cambria}
+$endif$
+
+$if(sansfont)$
+\setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
+$else$
+\setsansfont{Calibri}
+$endif$
+
+$if(monofont)$
+\setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$monofont$}
+$else$
+\setmonofont[Scale=0.85]{Consolas}
+$endif$
+
+% Set line spacing 
+$if(linestretch)$
+\setstretch{$linestretch$}
+$else$
+\setstretch{1.15}
+$endif$
+
+% Format section headings
+% Using explicit titlesec format for technical proposal with manual numbers
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{darkblue}}
+  {}{0em}{}[\titlerule]
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{darkblue}}
+  {}{0em}{}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{darkblue}}
+  {}{0em}{}
+
+% Adjust spacing around section headings
+\titlespacing*{\section}{0pt}{1.5em}{1em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.8em}
+\titlespacing*{\subsubsection}{0pt}{1em}{0.6em}
+
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{$if(title)$$title$$endif$}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{darkblue}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrulewidth}{0pt}
+
+% Hyperref setup
+\hypersetup{
+  colorlinks=true,
+  linkcolor=linkcolor,
+  citecolor=darkblue,
+  urlcolor=linkcolor,
+  pdfborder={0 0 0},
+  breaklinks=true,
+  $if(title)$pdftitle={$title$},$endif$
+  $if(author)$pdfauthor={$for(author)$$author$$sep$; $endfor$},$endif$
+}
+
+% List settings - better spacing and bullets
+\setlist{itemsep=0.5em, topsep=0.8em, parsep=0.3em, leftmargin=1.5em}
+\setlist[itemize]{label=\textbullet}
+% Configure nested lists with different bullet styles and proper indentation
+\setlist[itemize,1]{label=\textbullet, leftmargin=1.5em}
+\setlist[itemize,2]{label=\textendash, leftmargin=1.2em}
+\setlist[itemize,3]{label=\textasteriskcentered, leftmargin=1.2em}
+% Ensure proper indentation levels for nested lists
+\setlistdepth{3}
+% Better handling of lists after paragraphs or headings
+\AtBeginEnvironment{itemize}{\vspace{0.5em}}
+\AfterEndEnvironment{itemize}{\vspace{0.5em}}
+
+% Custom bullet points
+\newcommand{\checkmark}{\ding{51}}
+
+% Quote blocks
+\renewenvironment{quote}
+  {\begin{tcolorbox}[colback=lightblue,colframe=mediumblue,arc=0pt,boxrule=1pt,left=5pt,right=5pt,top=5pt,bottom=5pt]
+   \itshape}
+  {\end{tcolorbox}}
+
+% Code listing style
+\lstset{
+  backgroundcolor=\color{lightgray},
+  basicstyle=\small\ttfamily,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{darkgray},
+  frame=single,
+  framesep=2pt,
+  keepspaces=true,
+  keywordstyle=\color{mediumblue}\bfseries,
+  numberstyle=\tiny\color{darkgray},
+  rulecolor=\color{black},
+  showstringspaces=false,
+  stringstyle=\color{darkblue},
+  tabsize=2
+}
+
+% Table settings
+\captionsetup[table]{
+  labelsep=space,
+  justification=raggedright,
+  singlelinecheck=off,
+  labelfont=bf,
+  skip=4pt
+}
+
+% Add header includes
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+% Title, author, date
+$if(title)$
+\title{\sffamily\LARGE\bfseries\color{darkblue}$title$}
+$endif$
+$if(subtitle)$
+\newcommand{\subtitle}[1]{\posttitle{\par\large#1\par}}
+\subtitle{$subtitle$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+$if(date)$
+\date{$date$}
+$endif$
+
+% Begin document
+\begin{document}
+
+% Title
+$if(title)$
+\begin{center}
+\Huge\bfseries\sffamily\color{darkblue}$title$
+\vspace{0.5cm}
+$if(author)$
+\Large\sffamily $for(author)$$author$$sep$ \par $endfor$
+\vspace{0.3cm}
+$endif$
+$if(date)$
+\large\sffamily $date$
+$endif$
+\end{center}
+\vspace{1cm}
+$endif$
+
+% Table of contents
+$if(toc)$
+\setcounter{tocdepth}{3}
+\renewcommand{\contentsname}{Table of Contents}
+\tableofcontents
+\vspace{1cm}
+$endif$
+
+% Rule before main content
+\vspace{0.5cm}
+\rule{\textwidth}{1pt}
+\vspace{0.5cm}
+
+% Main content
+$body$
+
+% Footer
+\vfill
+\begin{center}
+\rule{0.5\textwidth}{0.5pt}\\
+\small\sffamily © $if(date)$$date$$endif$ $if(author)$$for(author)$$author$$sep$, $endfor$$endif$
+\end{center}
+
+\end{document}

@@ -1,0 +1,174 @@
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+
+% Use microtype for high-quality typography
+\usepackage{microtype}
+
+% Set up the fonts
+$if(fontfamily)$
+\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
+$endif$
+
+$if(mainfont)$
+\usepackage{fontspec}
+\setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+$endif$
+
+$if(sansfont)$
+\setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
+$endif$
+
+$if(monofont)$
+\setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$monofont$}
+$endif$
+
+% Use upquote for straight quotes in verbatim environments
+\usepackage{upquote}
+
+% Use multilingual support
+$if(lang)$
+\usepackage{polyglossia}
+\setmainlanguage[$polyglossia-lang.options$]{$polyglossia-lang.name$}
+$for(polyglossia-otherlangs)$
+\setotherlanguage[$polyglossia-otherlangs.options$]{$polyglossia-otherlangs.name$}
+$endfor$
+$endif$
+
+% Use biblatex for citations
+$if(biblatex)$
+\usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+$endif$
+
+% Graphics and color settings
+\usepackage{graphicx}
+\usepackage{xcolor}
+\definecolor{linkcolor}{HTML}{0000FF}
+\definecolor{urlcolor}{HTML}{0000FF}
+\definecolor{citecolor}{HTML}{000088}
+
+% Hyperref for links
+\usepackage[
+  colorlinks=true,
+  linkcolor=$if(linkcolor)$$linkcolor$$else$linkcolor$endif$,
+  filecolor=$if(filecolor)$$filecolor$$else$linkcolor$endif$,
+  citecolor=$if(citecolor)$$citecolor$$else$citecolor$endif$,
+  urlcolor=$if(urlcolor)$$urlcolor$$else$urlcolor$endif$,
+  pdfborder={0 0 0},
+  breaklinks=true
+]{hyperref}
+
+% Use longtable for multi-page tables
+\usepackage{longtable}
+
+% Use booktabs for high-quality tables
+\usepackage{booktabs}
+
+% Use adjustbox for better table placement
+\usepackage{adjustbox}
+
+% Use caption for better figure/table captions
+\usepackage[margin=10pt,font=small,labelfont=bf]{caption}
+
+% Use fancyhdr for customizable headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Use enumitem for customizable lists
+\usepackage{enumitem}
+
+% Use geometry for page margins
+\usepackage[
+  margin=1in,
+  $if(margin_left)$left=$margin_left$,$endif$
+  $if(margin_right)$right=$margin_right$,$endif$
+  $if(margin_top)$top=$margin_top$,$endif$
+  $if(margin_bottom)$bottom=$margin_bottom$,$endif$
+]{geometry}
+
+% Use listings for code highlighting
+\usepackage{listings}
+\usepackage{lstfiracode}
+\lstset{
+  basicstyle=\small\ttfamily,
+  breaklines=true,
+  columns=fullflexible,
+  frame=single,
+  keepspaces=true,
+  keywordstyle=\color{blue}\bfseries,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  showstringspaces=false,
+  stringstyle=\color{green!50!black},
+  tabsize=2
+}
+
+% Use lineno for line numbers if requested
+$if(linenumbers)$
+\usepackage{lineno}
+\linenumbers
+$endif$
+
+% Set line spacing
+$if(linestretch)$
+\usepackage{setspace}
+\setstretch{$linestretch$}
+$endif$
+
+% Add header includes
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+% Title, author, date
+$if(title)$
+\title{$title$}
+$endif$
+$if(subtitle)$
+\subtitle{$subtitle$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+$if(date)$
+\date{$date$}
+$endif$
+
+% Begin document
+\begin{document}
+
+% Title page
+$if(title)$
+\maketitle
+$endif$
+
+% Table of contents
+$if(toc)$
+\tableofcontents
+$endif$
+
+% List of figures
+$if(lof)$
+\listoffigures
+$endif$
+
+% List of tables
+$if(lot)$
+\listoftables
+$endif$
+
+% Main content
+$body$
+
+% Bibliography
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+$endif$
+
+\end{document}

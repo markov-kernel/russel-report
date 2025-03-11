@@ -1,0 +1,187 @@
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$,$endif$,12pt,twoside]{article}
+
+% Use microtype for high-quality typography
+\usepackage{microtype}
+\usepackage{fontspec}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{caption}
+
+% For academic citations
+\usepackage[style=apa,backend=biber,natbib=true]{biblatex}
+$if(bibliography)$
+\addbibresource{$bibliography$}
+$endif$
+
+% Define colors
+\definecolor{maroon}{RGB}{128, 0, 0}
+\definecolor{darkgray}{RGB}{50, 50, 50}
+\definecolor{linkcolor}{RGB}{0, 0, 128}
+
+% Set page geometry for academic papers (typically 1 inch margins)
+\geometry{
+  $if(margin_left)$left=$margin_left$,$else$left=1in,$endif$
+  $if(margin_right)$right=$margin_right$,$else$right=1in,$endif$
+  $if(margin_top)$top=$margin_top$,$else$top=1in,$endif$
+  $if(margin_bottom)$bottom=$margin_bottom$,$else$bottom=1in,$endif$
+}
+
+% Set up fonts - use more classic/scholarly fonts for academic papers
+$if(mainfont)$
+\setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+$else$
+\setmainfont{Palatino Linotype}
+$endif$
+
+$if(sansfont)$
+\setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
+$else$
+\setsansfont{Gill Sans}
+$endif$
+
+$if(monofont)$
+\setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$monofont$}
+$else$
+\setmonofont[Scale=0.9]{Consolas}
+$endif$
+
+% Set line spacing (often 1.5 or double-spaced for academic papers)
+$if(linestretch)$
+\setstretch{$linestretch$}
+$else$
+\setstretch{1.5}
+$endif$
+
+% Format section headings for academic papers
+\titleformat{\section}
+  {\normalfont\large\bfseries}
+  {\thesection.}{0.5em}{}
+
+\titleformat{\subsection}
+  {\normalfont\normalsize\bfseries}
+  {\thesubsection.}{0.5em}{}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\itshape}
+  {\thesubsubsection.}{0.5em}{}
+
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO,RE]{\slshape \nouppercase{\rightmark}}
+\fancyhead[RO,LE]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Hyperref setup
+\hypersetup{
+  colorlinks=true,
+  linkcolor=linkcolor,
+  citecolor=maroon,
+  urlcolor=linkcolor,
+  pdfborder={0 0 0},
+  breaklinks=true,
+  $if(title)$pdftitle={$title$},$endif$
+  $if(author)$pdfauthor={$for(author)$$author$$sep$; $endfor$},$endif$
+}
+
+% List settings for academic papers
+\setlist{topsep=0.5ex, itemsep=0.25ex}
+
+% Code listing style (more subdued for academic papers)
+\lstset{
+  backgroundcolor=\color{white},
+  basicstyle=\small\ttfamily,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{darkgray},
+  frame=lines,
+  keepspaces=true,
+  keywordstyle=\bfseries,
+  rulecolor=\color{black},
+  showstringspaces=false,
+  stringstyle=\itshape,
+  tabsize=2
+}
+
+% For equations
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+% For improved tables
+\usepackage{booktabs}
+\usepackage{threeparttable}
+
+% Add header includes
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+% Title, author, date for academic papers
+$if(title)$
+\title{\Large\bfseries $title$}
+$endif$
+$if(subtitle)$
+\newcommand{\subtitle}[1]{\posttitle{\par\normalsize\emph{#1}\par}}
+\subtitle{$subtitle$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+$if(date)$
+\date{$date$}
+$endif$
+
+% Begin document
+\begin{document}
+
+% Title and abstract
+$if(title)$
+\maketitle
+$endif$
+
+% Abstract for academic papers
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
+$endif$
+
+% Add keywords
+$if(keywords)$
+\noindent\textbf{Keywords:} $keywords$
+\vspace{1.5em}
+$endif$
+
+% Table of contents
+$if(toc)$
+\tableofcontents
+\vspace{2em}
+$endif$
+
+% Main content
+$body$
+
+% Bibliography
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+% Appendices if needed
+$if(appendix)$
+\appendix
+$appendix$
+$endif$
+
+\end{document}

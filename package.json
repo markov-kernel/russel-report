@@ -1,0 +1,36 @@
+{
+  "name": "russel-report",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "bin": {
+    "md2pdf": "./bin/md2pdf.js"
+  },
+  "scripts": {
+    "dev": "slidev slides.md",
+    "build": "slidev build slides.md",
+    "export": "slidev export slides.md",
+    "start": "node src/index.js",
+    "convert": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["markdown", "pdf", "pandoc", "latex", "converter"],
+  "author": "",
+  "license": "ISC",
+  "description": "High-quality Markdown to PDF converter using Pandoc and LaTeX",
+  "dependencies": {
+    "@slidev/cli": "^51.4.0",
+    "@slidev/theme-default": "^0.25.0",
+    "chalk": "^4.1.2",
+    "chokidar": "^3.5.3",
+    "commander": "^11.1.0",
+    "fs-extra": "^11.2.0",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
+    "sharp": "^0.33.2",
+    "tmp-promise": "^3.0.3"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

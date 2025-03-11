@@ -1,0 +1,33 @@
+{
+  "name": "md_to_pdf",
+  "version": "1.0.0",
+  "description": "High-quality Markdown to PDF converter using Pandoc and LaTeX",
+  "main": "src/index.js",
+  "bin": {
+    "md2pdf": "./bin/md2pdf.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "convert": "node src/index.js -i",
+    "dev": "node src/index.js --watch",
+    "test": "echo \"No tests specified\" && exit 0",
+    "validate": "node src/utils/markdown-validator.js"
+  },
+  "keywords": [
+    "markdown",
+    "pdf",
+    "pandoc",
+    "latex",
+    "converter"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^11.1.0",
+    "fs-extra": "^11.2.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
