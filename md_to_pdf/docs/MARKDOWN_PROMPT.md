@@ -324,6 +324,10 @@ For images that scale properly:
 3. Proper indentation of nested lists (2 spaces per level)
 4. Consistent formatting of similar elements
 5. No hyphenation of words at line breaks
+6. Top-level heading (# Title) has no number
+7. Second-level headings (##) are numbered 1., 2., 3., etc.
+8. Third-level headings (###) are numbered 1.1, 1.2, 2.1, etc.
+9. Fourth-level headings (####) are numbered 1.1.1, 1.1.2, etc.
 
 -----
 #### **Original Text**

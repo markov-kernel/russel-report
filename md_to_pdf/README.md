@@ -200,7 +200,8 @@ For optimal results, follow these key formatting guidelines:
 
 ### Document Structure
 - Use proper heading hierarchy (# for title, ## for sections, etc.)
-- Let the converter handle section numbering automatically
+- Include section numbers in your headings (e.g., "## 1. Main Section", "### 1.1 Subsection")
+- Use consistent numbering patterns (1., 1.1, 1.1.1, etc.)
 - Include metadata at the top of your document (author, date)
 
 ### Spacing
@@ -213,14 +214,53 @@ For optimal results, follow these key formatting guidelines:
 - For nested items, indent with exactly 2 spaces per level
 - Ensure a blank line before the first item and after the last item
 
+### Section Numbering Guidelines
+
+The converter works best with manually numbered sections in your markdown files. Follow these numbering rules:
+
+- Top-level document title: No number (e.g., `# Document Title`)
+- Main sections (Level 2): Use `## 1. Section Name`, `## 2. Section Name`, etc.
+- Subsections (Level 3): Use `### 1.1 Subsection Name`, `### 1.2 Subsection Name`, etc.
+- Sub-subsections (Level 4): Use `#### 1.1.1 Sub-subsection Name`, etc.
+
+This manual numbering approach ensures that section numbers appear correctly in both the document and the table of contents.
+
+Example:
+```markdown
+# Document Title
+
+## 1. Introduction
+Text here...
+
+### 1.1 Background
+More text...
+
+### 1.2 Objectives
+Even more text...
+
+## 2. Method
+Another section...
+
+### 2.1 Approach
+Details here...
+```
+
 ### Example Document
-See `docs/input/to_process/test-clean.md` for a properly formatted example.
+See `docs/input/to_process/test.md` for a properly formatted example.
 
 ## Troubleshooting
 
 ### Formatting Issues
 - **Problem**: List items, blockquotes, or tables don't render correctly
 - **Solution**: Run `npm run validate` on your document and fix any reported issues
+
+### Section Numbering Issues
+- **Problem**: Table of contents shows incorrect or missing section numbers
+- **Solution**: Make sure you've included proper section numbers in your markdown headings (see Section Numbering Guidelines)
+
+### Table of Contents Issues
+- **Problem**: Double numbering appears in the table of contents
+- **Solution**: Ensure you're using manual section numbering in headings and NOT using the `--number-sections` option with pandoc
 
 ### Common Conversion Issues
 

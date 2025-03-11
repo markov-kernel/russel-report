@@ -62,7 +62,7 @@ const texTemplate = `
 % Define modern color palette
 \\definecolor{primarycolor}{RGB}{24, 58, 82}     % Dark navy blue
 \\definecolor{secondarycolor}{RGB}{71, 149, 215} % Vibrant blue
-\\definecolor{accentcolor}{RGB}{242, 120, 75}    % Orange accent
+\\definecolor{accentcolor}{RGB}{71, 149, 215}    % Changed to match secondary blue
 \\definecolor{lightblue}{RGB}{240, 247, 255}     % Very light blue for backgrounds
 \\definecolor{darkgray}{RGB}{60, 60, 60}         % For body text
 \\definecolor{lightgray}{RGB}{245, 245, 245}     % For code backgrounds
@@ -340,10 +340,10 @@ const texTemplate = `
     
     \\vfill
     
-    % Accent bar
+    % Accent bar - now using secondary blue instead of orange
     \\begin{tcolorbox}[
-      colback=accentcolor,
-      colframe=accentcolor,
+      colback=secondarycolor,
+      colframe=secondarycolor,
       width=4cm,
       height=0.5cm,
       halign=center,
